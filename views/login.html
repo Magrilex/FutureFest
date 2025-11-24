@@ -1,17 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-        <label>Usuário:</label><br>
-        <input type="text" name="usuario" required><br>
-        <label>Senha:</label><br>
-        <input type="password" name="senha" required><br>
-        <button type="submit">Entrar</button>
-    </form>
-    <p>Não possui uma conta? <a href="/registro">Registre-se</a></p>
+    <nav>
+        <img src="img/logo.png" alt="Logo">
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/registro.html">Registro</a></li>
+            <li><a class="active" href="/login.html">Login</a></li>
+            <li><a href="/suporte.html">Suporte</a></li>
+        </ul>
+    </nav>
+
+    <main class="descricao">
+        <h1>Entrar</h1>
+        <form action="/login" method="POST">
+            <label>Usuário:</label><br>
+            <input type="text" name="usuario" required><br>
+            <label>Senha:</label><br>
+            <input type="password" name="senha" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <p>Não possui uma conta? <a href="/registro.html">Registre-se</a></p>
+    </main>
+
+    <footer>
+        <p>Future Fest — &copy; 2025</p>
+    </footer>
 </body>
 </html>

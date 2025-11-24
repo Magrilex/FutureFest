@@ -12,20 +12,12 @@ const porta = 3000; // Porta do servidor
 
 // Configuração do Express para formulários e JSON
 app.use(express.urlencoded({ extended: true })); 
-app.use(express.json()); 
+app.use(express.json());
+app.use(express.static('public'))
 
-app.use(session({
-    secret: 'arrozEfeijao',
-    resave: false,
-    saveUninitialized: true,
-    store: MongoStore.create({
-        mongoUrl: urlMongo,
-        collectionName: 'sessions'
-    }),
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24
-    }
-}));
+// Configuração do banco MongoDB
+const urlMongo = 'mongodb+srv://pedroivoracs_db_user:.P3dr01v0.@cluster0.jgzfpcc.mongodb.net/?appName=Cluster0';
+const nomeBanco = 'sistemalogin';
 
 // Configuração da sessão
 app.use(session({
@@ -40,11 +32,6 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24
     }
 }));
-
-// Configuração do banco MongoDB
-const urlMongo = 'mongodb+srv://pedroivoracs_db_user:.P3dr01v0.@cluster0.jgzfpcc.mongodb.net/?appName=Cluster0';
-const nomeBanco = 'sistemalogin';
-
 
 // Rota para página da home
 app.get('/', (req, res) => {
