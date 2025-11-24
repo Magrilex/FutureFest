@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt'); // Biblioteca para criptografar senhas
 require('dotenv').config(); // Carrega variáveis de ambiente
 const OpenAI = require('openai'); // Biblioteca OpenAI
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY }); 
+const MongoStore = require('connect-mongo');
 
 const app = express(); // Instância do Express
 const porta = 3000; // Porta do servidor
@@ -13,15 +14,35 @@ const porta = 3000; // Porta do servidor
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json()); 
 
-// Configuração da sessão
 app.use(session({
-    secret: 'segredo-super-seguro',
+    secret: 'arrozEfeijao',
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: urlMongo,
+        collectionName: 'sessions'
+    }),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}));
+
+// Configuração da sessão
+app.use(session({
+    secret: 'metalicagoat',
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: urlMongo,
+        collectionName: 'sessions'
+    }),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24
+    }
 }));
 
 // Configuração do banco MongoDB
-const urlMongo = 'mongodb://127.0.0.1:27017/';
+const urlMongo = 'mongodb+srv://pedroivoracs_db_user:.P3dr01v0.@cluster0.jgzfpcc.mongodb.net/?appName=Cluster0';
 const nomeBanco = 'sistemalogin';
 
 
