@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.static('public'))
 
 // Configuração do banco MongoDB
-const urlMongo = 'mongodb+srv://pedroivoracs_db_user:.P3dr01v0.@cluster0.jgzfpcc.mongodb.net/?appName=Cluster0';
+const urlMongo = 'mongodb+srv://pedroivoracs_db_user:.P3dr01v0.@cluster0.jgzfpcc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const nomeBanco = 'sistemalogin';
 
 // Configuração da sessão
@@ -65,9 +65,9 @@ app.post('/registro', async (req, res) => {
             });
 
             res.redirect('/login');
-        }
+        }   
     } catch (erro) {
-        res.send('Erro ao registrar usuário.');
+        res.redirect('/erro');
     } finally {
         cliente.close();
     }
