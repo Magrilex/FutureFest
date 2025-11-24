@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte - Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .chat-box {
+            border: 1px solid #ccc;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .message.user {
+            text-align: right;
+            color: #007bff;
+        }
+        .message.bot {
+            text-align: left;
+            color: #333;
+        }
+        input[type="text"] {
+            width: calc(100% - 100px);
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Assistente Virtual</h1>
+    </header>
+    <div class="container">
+        <div class="chat-box">
+            <div class="messages" id="messages">
+                <!-- Mensagens do chatbot e do usuário aparecerão aqui -->
+            </div>
+            <input type="text" id="userInput" placeholder="Digite sua mensagem...">
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para enviar mensagem ao chatbot
+        function enviarMensagem() {
+            const userInput = document.getElementById('userInput');
+            const messages = document.getElementById('messages');
+
+            if (userInput.value.trim() === '') return;
+
+            // Adiciona a mensagem do usuário na tela
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user';
+            userMessage.innerText = userInput.value;
+            messages.appendChild(userMessage);
+
+            // Envia a mensagem ao servidor
+            fetch('/api/chatbot', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mensagem: userInput.value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Adiciona a resposta do chatbot na tela
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot';
+                botMessage.innerText = data.resposta;
+                messages.appendChild(botMessage);
+
+                // Rola para a última mensagem
+                messages.scrollTop = messages.scrollHeight;
+            })
+            .catch(err => console.error(err));
+
+            // Limpa o campo de entrada
+            userInput.value = '';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro</title>
+    <link rel="stylesheet" href="/views/style.css">
+</head>
+<body>
+    <nav>
+        <img src="img/logo.png" alt="Logo">
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a class="active" href="/registro.html">Registro</a></li>
+            <li><a href="/login.html">Login</a></li>
+            <li><a href="/suporte.html">Suporte</a></li>
+        </ul>
+    </nav>
+
+    <main class="descricao">
+        <h1>Registrar Novo Usuário</h1>
+        <form action="/registro" method="POST">
+            <label>Usuário:</label><br>
+            <input type="text" name="usuario" required><br>
+            <label>Senha:</label><br>
+            <input type="password" name="senha" required><br>
+            <button type="submit">Registrar</button>
+        </form>
+        <p>Já possui uma conta? <a href="/login.html">Faça login</a></p>
+    </main>
+
+    <footer>
+        <p>Future Fest — &copy; 2025</p>
+    </footer>
+</body>
+</html>
