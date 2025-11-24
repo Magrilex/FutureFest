@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.static('public'))
 
 // Configuração do banco MongoDB
-const urlMongo = 'mongodb+srv://pedroivoracs_db_user:.P3dr01v0.@cluster0.jgzfpcc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const urlMongo = "mongodb+srv://VictorEiki:Veky2309!@cluster0.dy3hg9b.mongodb.net/?appName=Cluster0";
 const nomeBanco = 'sistemalogin';
 
 // Configuração da sessão
@@ -91,7 +91,7 @@ app.post('/login', async (req, res) => {
 
         if (usuario && await bcrypt.compare(req.body.senha, usuario.senha)) {
             req.session.usuario = req.body.usuario;
-            res.redirect('/bemvindo');
+            res.redirect('/usuario');
         } else {
             res.redirect('/erro');
         }

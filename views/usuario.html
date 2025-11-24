@@ -4,102 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página do Usuário</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        .container {
-            padding: 20px;
-        }
-        .video-section, .ai-section, .chatbot-section {
-            margin-bottom: 30px;
-        }
-        iframe {
-            width: 100%;
-            height: 315px;
-        }
-        .ai-box {
-            border: 1px solid #ccc;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 5px;
-        }
-        .chatbot-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .chatbot-button:hover {
-            background-color: #0056b3;
-        }
+        /* Estilos específicos para a área do usuário */
+        body { background-color: #f4f4f9; }
+        .container { padding: 20px; }
+        .video-section, .ai-section, .chatbot-section { margin-bottom: 30px; }
+        iframe { width: 100%; height: 315px; }
+        .ai-box { border: 1px solid #ccc; padding: 15px; background-color: #fff; border-radius: 5px; }
+        .chatbot-button { display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; }
+        .chatbot-button:hover { background-color: #0056b3; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Bem-vindo à Área do Usuário</h1>
-    </header>
-    <div class="container">
-        <!-- Seção de Vídeo-Aulas -->
-        <div class="video-section">
-            <h2>Vídeo-Aulas</h2>
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-        </div>
+    <nav>
+        <img src="img/logo.png" alt="Logo">
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/registro.html">Registro</a></li>
+            <li><a href="/login.html">Login</a></li>
+            <li><a href="/suporte.html">Suporte</a></li>
+        </ul>
+    </nav>
 
-        <!-- Seção de AIs -->
-        <div class="ai-section">
-            <h2>Ferramentas de Inteligência Artificial</h2>
-            <div class="ai-box">
-                <h3>Geração de Resumos e Testes</h3>
-                <p>Resumo gerado automaticamente com base no conteúdo do vídeo.</p>
-                <button onclick="gerarResumo()">Gerar Resumo</button>
-                <div id="resumo"></div>
+    <main class="descricao">
+        <header>
+            <h1>Bem-vindo à Área do Usuário</h1>
+        </header>
+        <div class="container">
+            <div class="video-section">
+                <h2>Vídeo-Aulas</h2>
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
             </div>
-            <div class="ai-box">
-                <h3>Recomendação Personalizada de Vídeos</h3>
-                <p>Receba recomendações de vídeos com base no seu perfil.</p>
-                <button onclick="recomendarVideos()">Recomendar Vídeos</button>
-                <div id="recomendacoes"></div>
-            </div>
-        </div>
 
-        <!-- Seção do Chatbot -->
-        <div class="chatbot-section">
-            <h2>Assistente Virtual</h2>
-            <a href="/suporte" class="chatbot-button">Abrir Chatbot</a>
+            <div class="ai-section">
+                <h2>Ferramentas de Inteligência Artificial</h2>
+                <div class="ai-box">
+                    <h3>Geração de Resumos e Testes</h3>
+                    <p>Resumo gerado automaticamente com base no conteúdo do vídeo.</p>
+                    <button onclick="gerarResumo()">Gerar Resumo</button>
+                    <div id="resumo"></div>
+                </div>
+                <div class="ai-box">
+                    <h3>Recomendação Personalizada de Vídeos</h3>
+                    <p>Receba recomendações de vídeos com base no seu perfil.</p>
+                    <button onclick="recomendarVideos()">Recomendar Vídeos</button>
+                    <div id="recomendacoes"></div>
+                </div>
+            </div>
+
+            <div class="chatbot-section">
+                <h2>Assistente Virtual</h2>
+                <a href="/suporte.html" class="chatbot-button">Abrir Chatbot</a>
+            </div>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        <p>Future Fest — &copy; 2025</p>
+    </footer>
 
     <script>
-        // Função para gerar resumo
         function gerarResumo() {
             fetch('/api/gerar-resumo', { method: 'POST' })
                 .then(response => response.json())
-                .then(data => {
-                    document.getElementById('resumo').innerText = data.resumo;
-                })
+                .then(data => { document.getElementById('resumo').innerText = data.resumo; })
                 .catch(err => console.error(err));
         }
-
-        // Função para recomendar vídeos
         function recomendarVideos() {
             fetch('/api/recomendar-videos', { method: 'POST' })
                 .then(response => response.json())
-                .then(data => {
-                    const recomendacoes = data.videos.map(video => `<p>${video}</p>`).join('');
-                    document.getElementById('recomendacoes').innerHTML = recomendacoes;
-                })
+                .then(data => { const recomendacoes = data.videos.map(video => <p>${video}</p>).join(''); document.getElementById('recomendacoes').innerHTML = recomendacoes; })
                 .catch(err => console.error(err));
         }
     </script>
